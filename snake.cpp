@@ -1,3 +1,5 @@
+#include <iostream>
+#include "constants.h"
 #include "grid.h"
 #include "snake.h"
 #include <raylib.h>
@@ -16,6 +18,25 @@ Snake::Snake(int pos_x, int pos_y, Color color) {
 	this->color = color;
 	speed_x = 1.0f;
 	speed_y = 0.0f;
+}
+
+int constrainPosition_x(int pos_x) {
+	if(pos_x < 0)
+		return WIDTH - SCALE;
+	if(pos_x >= WIDTH)
+		return 0;		
+
+	return pos_x;
+
+}
+
+int constrainPosition_y(int pos_y) {
+	if(pos_y < 0)
+		return HEIGHT - SCALE;
+	if(pos_y >= HEIGHT)
+		return 0;
+
+	return pos_y;
 }
 
 void Snake::Update() {
@@ -38,6 +59,9 @@ void Snake::Update() {
 
 	pos_x += speed_x * SCALE;
 	pos_y += speed_y * SCALE;
+
+	pos_x = constrainPosition_x(pos_x);
+	pos_y = constrainPosition_y(pos_y);
 }
 
 int Snake::GetX() const {

@@ -29,8 +29,10 @@ void Grid::Draw() {
 		for(auto &square : line) {
 			if(square.x == snake.GetX() && square.y == snake.GetY())
 				DrawRectangle(square.x, square.y, SCALE, SCALE, RED);
+#ifdef GRID
 			else
 				DrawRectangleLines(square.x, square.y, SCALE, SCALE, BLACK);
+#endif
 		}
 	}
 }

@@ -1,5 +1,5 @@
 CC=clang++
-CFLAGS=-Wall -O3 -std=c++17
+CFLAGS=-Wall -O3 -std=c++17 -DGRID
 LFLAGS=-lm -lraylib
 OUT=snake
 
