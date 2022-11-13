@@ -1,7 +1,11 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
-const unsigned int WIDTH = 800;
-const unsigned int HEIGHT = 600;
-const unsigned int SCALE = 20;
-const unsigned int FRAMERATE = 15;
+#define WIDTH 800
+#define HEIGHT 600
+#define SCALE 20
+#define FRAMERATE 10
+
+#define FOOD_COLOR GREEN
+#define SNAKE_COLOR RED
+#define GRID_COLOR LIGHTGRAY
 #endif

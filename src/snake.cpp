@@ -39,19 +39,19 @@ int constrainPosition_y(int pos_y) {
 }
 
 void Snake::Update() {
-	if(IsKeyPressed(KEY_W)) {
+	if(IsKeyPressed(KEY_W) && speed_y == 0) {
 		speed_x = 0;
 		speed_y = -1;
 	}
-	else if(IsKeyPressed(KEY_A)) {
+	else if(IsKeyPressed(KEY_A) && speed_x == 0) {
 		speed_y = 0;
 		speed_x = -1;
 	}
-	else if(IsKeyPressed(KEY_S)) { 
+	else if(IsKeyPressed(KEY_S) && speed_y == 0) { 
 		speed_x = 0;
 		speed_y = 1;
 	}
-	else if(IsKeyPressed(KEY_D)) { 
+	else if(IsKeyPressed(KEY_D) && speed_x == 0) {
 		speed_y = 0;
 		speed_x = 1;
 	}

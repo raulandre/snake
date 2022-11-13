@@ -32,15 +32,15 @@ void Grid::Update() {
 }
 
 void Grid::Draw() {
-	DrawRectangle(food.GetX(), food.GetY(), SCALE, SCALE, YELLOW);
+	DrawRectangle(food.GetX(), food.GetY(), SCALE, SCALE, FOOD_COLOR);
 
 	for(auto &line : m_Grid) {
 		for(auto &square : line) {
 			if(square.x == snake.GetX() && square.y == snake.GetY())
-				DrawRectangle(square.x, square.y, SCALE, SCALE, RED);
+				DrawRectangle(square.x, square.y, SCALE, SCALE, SNAKE_COLOR);
 #ifdef GRID
 			else
-				DrawRectangleLines(square.x, square.y, SCALE, SCALE, BLACK);
+				DrawRectangleLines(square.x, square.y, SCALE, SCALE, GRID_COLOR);
 #endif
 		}
 	}
