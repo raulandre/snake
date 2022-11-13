@@ -5,7 +5,7 @@ INCLUDE=-Iinclude/
 OUT=snake
 
 all: src/*.cpp
-	$(CC) $(CFLAGS) $(INCLUDE) $^ $(LFLAGS) -o $(OUT) && ./$(OUT)
+	$(CC) $(CFLAGS) $(INCLUDE) $^ $(LFLAGS) -o $(OUT)
 
 clean:
 	rm $(OUT)
