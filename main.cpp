@@ -5,7 +5,7 @@
 
 int main() {
 	InitWindow(WIDTH, HEIGHT, "Snake Game");
-	SetTargetFPS(10);
+	SetTargetFPS(FRAMERATE);
 
 	Grid g;
 	while(!WindowShouldClose()) {

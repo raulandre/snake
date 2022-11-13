@@ -21,12 +21,16 @@ Grid::Grid() {
 }
 
 void Grid::Update() {
+	snake.Update();
 }
 
 void Grid::Draw() {
 	for(auto &line : m_Grid) {
 		for(auto &square : line) {
-			DrawRectangleLines(square.x, square.y, SCALE, SCALE, BLACK);
+			if(square.x == snake.GetX() && square.y == snake.GetY())
+				DrawRectangle(square.x, square.y, SCALE, SCALE, RED);
+			else
+				DrawRectangleLines(square.x, square.y, SCALE, SCALE, BLACK);
 		}
 	}
 }
