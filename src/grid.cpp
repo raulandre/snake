@@ -18,10 +18,14 @@ Grid::Grid() {
 
 		m_Grid.push_back(line);
 	}
+
+	snake.SetX(squaresPerLine / 2 * SCALE);
+	snake.SetY(lineCount / 2 * SCALE);
 }
 
 void Grid::Update() {
 	snake.Update();
+	if(IsKeyPressed(KEY_SPACE)) snake.Eat();
 }
 
 void Grid::Draw() {
@@ -34,5 +38,9 @@ void Grid::Draw() {
 				DrawRectangleLines(square.x, square.y, SCALE, SCALE, BLACK);
 #endif
 		}
+	}
+
+	for(auto &tailRec : snake.Tail()) {
+		DrawRectangle(tailRec.x, tailRec.y, SCALE, SCALE, RED);
 	}
 }

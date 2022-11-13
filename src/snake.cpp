@@ -27,7 +27,6 @@ int constrainPosition_x(int pos_x) {
 		return 0;		
 
 	return pos_x;
-
 }
 
 int constrainPosition_y(int pos_y) {
@@ -57,6 +56,13 @@ void Snake::Update() {
 		speed_x = 1;
 	}
 
+	if(tail.size() > 0) {
+		for(int i = 0; i < tail.size() - 1; i++) {
+			tail[i] = tail[i+1];
+		}
+		tail[tail.size() - 1] = Rectangle{.x = (float)pos_x, .y = (float)pos_y, .width = SCALE, .height = SCALE };
+	}
+
 	pos_x += speed_x * SCALE;
 	pos_y += speed_y * SCALE;
 
@@ -70,4 +76,20 @@ int Snake::GetX() const {
 
 int Snake::GetY() const {
 	return pos_y;
+}
+
+std::vector<Rectangle> Snake::Tail() const {
+	return tail;
+}
+
+void Snake::SetX(int pos_x) {
+	this->pos_x = pos_x;
+}
+
+void Snake::SetY(int pos_y) {
+	this->pos_y = pos_y;
+}
+
+void Snake::Eat() {
+	tail.push_back(Rectangle{.x = (float)pos_x, .y = (float)pos_y, .width = SCALE, .height = SCALE });
 }
