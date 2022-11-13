@@ -25,10 +25,15 @@ Grid::Grid() {
 
 void Grid::Update() {
 	snake.Update();
-	if(IsKeyPressed(KEY_SPACE)) snake.Eat();
+	if(CheckCollisionRecs(snake.AsRec(), food.AsRec())) {
+		food.Teleport();
+		snake.Eat();
+	}
 }
 
 void Grid::Draw() {
+	DrawRectangle(food.GetX(), food.GetY(), SCALE, SCALE, YELLOW);
+
 	for(auto &line : m_Grid) {
 		for(auto &square : line) {
 			if(square.x == snake.GetX() && square.y == snake.GetY())

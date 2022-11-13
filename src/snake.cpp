@@ -93,3 +93,7 @@ void Snake::SetY(int pos_y) {
 void Snake::Eat() {
 	tail.push_back(Rectangle{.x = (float)pos_x, .y = (float)pos_y, .width = SCALE, .height = SCALE });
 }
+
+Rectangle Snake::AsRec() {
+	return Rectangle{ .x = (float)pos_x, .y = (float)pos_y, .width = SCALE, .height = SCALE };
+}

@@ -23,6 +23,7 @@ class Snake {
 			void SetX(int pos_x);
 			void SetY(int pos_y);
 			void Eat();
+			Rectangle AsRec();
 };
 
 #endif

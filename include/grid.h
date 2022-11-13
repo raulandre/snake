@@ -4,10 +4,12 @@
 #include <vector>
 #include "constants.h"
 #include "snake.h"
+#include "food.h"
 
 class Grid {
 	private:
 		Snake snake;
+		Food food;
 		std::vector<std::vector<Rectangle>> m_Grid;		
 		unsigned int m_Size;
 	public:
