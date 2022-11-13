@@ -13,6 +13,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Clone raylib
+      run: git clone https://github.com/raysan5/raylib.git
+    
+    - name: Install dependencies
+      run: sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+    
+    - name: Build raylib
+      run: cd raylib/src/ && make PLATFORM=PLATFORM_DESKTOP && sudo make install 
       
     - name: Run make
       run: make
