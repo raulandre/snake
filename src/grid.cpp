@@ -24,10 +24,17 @@ Grid::Grid() {
 }
 
 void Grid::Update() {
-	snake.Update();
-	if(CheckCollisionRecs(snake.AsRec(), food.AsRec())) {
-		food.Teleport();
-		snake.Eat();
+	if(!snake.dead) {
+		snake.Update();
+		if(CheckCollisionRecs(snake.AsRec(), food.AsRec())) {
+			food.Teleport();
+			snake.Eat();
+		}
+	} else {
+		if(IsKeyDown(KEY_SPACE)) {
+			snake.Reset();
+			food.Teleport();
+		}
 	}
 }
 
@@ -47,5 +54,14 @@ void Grid::Draw() {
 
 	for(auto &tailRec : snake.Tail()) {
 		DrawRectangle(tailRec.x, tailRec.y, SCALE, SCALE, RED);
+	}
+
+	if(snake.dead) {
+		auto msg1 = "GAME OVER!";
+		auto msg2 = "Hold [SPACE] to restart";
+		auto len = MeasureText(msg1, 28);
+		DrawText(msg1, WIDTH/2 - len/2, HEIGHT/2 - 28, 28, BLACK);
+		len = MeasureText(msg2, 14);
+		DrawText(msg2, WIDTH/2 - len/2, HEIGHT/2 + 28, 14, BLACK);
 	}
 }

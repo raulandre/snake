@@ -11,6 +11,7 @@ class Snake {
 			std::vector<Rectangle> tail;
 			Color color;
 	public:
+			bool dead;
 			Snake();
 			Snake(int pos_x, int pos_y, Color color);
 			void Update();
@@ -24,6 +25,8 @@ class Snake {
 			void SetY(int pos_y);
 			void Eat();
 			Rectangle AsRec();
+			bool Died();
+			void Reset();
 };
 
 #endif
