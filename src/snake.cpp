@@ -13,6 +13,9 @@ Snake::Snake() {
 	speed_x = 1.0f;
 	speed_y = 0.0f;
 	dead = false;
+
+	dieSound = LoadSound("sounds/die.wav");
+	SetSoundVolume(dieSound, 1.0f);
 }
 
 Snake::Snake(int pos_x, int pos_y, Color color) {
@@ -22,6 +25,9 @@ Snake::Snake(int pos_x, int pos_y, Color color) {
 	speed_x = 1.0f;
 	speed_y = 0.0f;
 	dead = false;
+
+	dieSound = LoadSound("sounds/die.wav");
+	SetSoundVolume(dieSound, 1.0f);
 }
 
 int constrainPosition_x(int pos_x) {
@@ -76,6 +82,9 @@ void Snake::Update() {
 	}
 
 	dead = Died();
+	if(dead) {
+		PlaySoundMulti(dieSound);
+	}
 }
 
 int Snake::GetX() const {

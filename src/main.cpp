@@ -5,6 +5,7 @@
 
 int main() {
 	InitWindow(WIDTH, HEIGHT, "Snake Game");
+	InitAudioDevice();
 	SetTargetFPS(FRAMERATE);
 
 	Grid g;
@@ -16,5 +17,7 @@ int main() {
 		EndDrawing();
 	}
 
+	StopSoundMulti();
+	CloseAudioDevice();
 	CloseWindow();
 }

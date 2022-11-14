@@ -33,7 +33,7 @@ void Grid::Update() {
 	} else {
 		if(IsKeyDown(KEY_SPACE)) {
 			snake.Reset();
-			food.Teleport();
+			food.Teleport(true);
 		}
 	}
 }

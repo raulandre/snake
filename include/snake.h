@@ -10,6 +10,7 @@ class Snake {
 			float speed_x, speed_y;
 			std::vector<Rectangle> tail;
 			Color color;
+			Sound dieSound;
 	public:
 			bool dead;
 			Snake();
