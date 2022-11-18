@@ -16,6 +16,7 @@ class Grid {
 		Grid();
 		void Update();
 		void Draw();
+		std::vector<Rectangle> GetEmptySpots() const;
 };
 
 #endif

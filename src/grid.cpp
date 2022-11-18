@@ -2,6 +2,23 @@
 #include "constants.h"
 #include "snake.h"
 #include <raylib.h>
+#include <random>
+#include <algorithm>
+
+//https://stackoverflow.com/questions/6942273/how-to-get-a-random-element-from-a-c-container
+template<typename Iter, typename RandomGenerator>
+Iter select_randomly(Iter start, Iter end, RandomGenerator& g) {
+    std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
+    std::advance(start, dis(g));
+    return start;
+}
+
+template<typename Iter>
+Iter select_randomly(Iter start, Iter end) {
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
+    return select_randomly(start, end, gen);
+}
 
 Grid::Grid() {
 	m_Size = WIDTH * HEIGHT / SCALE;
@@ -21,19 +38,27 @@ Grid::Grid() {
 
 	snake.SetX(squaresPerLine / 2 * SCALE);
 	snake.SetY(lineCount / 2 * SCALE);
+
+	auto available_positions = GetEmptySpots();
+	auto pos = *select_randomly(available_positions.begin(), available_positions.end());
+	food.Teleport(pos.x, pos.y, true);
 }
 
 void Grid::Update() {
 	if(!snake.dead) {
 		snake.Update();
 		if(CheckCollisionRecs(snake.AsRec(), food.AsRec())) {
-			food.Teleport();
+			auto available_positions = GetEmptySpots();
+			auto pos = *select_randomly(available_positions.begin(), available_positions.end());
+			food.Teleport(pos.x, pos.y);
 			snake.Eat();
 		}
 	} else {
 		if(IsKeyDown(KEY_SPACE)) {
 			snake.Reset();
-			food.Teleport(true);
+			auto available_positions = GetEmptySpots();
+			auto pos = *select_randomly(available_positions.begin(), available_positions.end());
+			food.Teleport(pos.x, pos.y, true);
 		}
 	}
 }
@@ -64,4 +89,24 @@ void Grid::Draw() {
 		len = MeasureText(msg2, 14);
 		DrawText(msg2, WIDTH/2 - len/2, HEIGHT/2 + 28, 14, BLACK);
 	}
+}
+
+std::vector<Rectangle> Grid::GetEmptySpots() const {
+	std::vector<Rectangle> g;
+	for(auto &line : m_Grid) {
+		for(auto &r : line) {
+			if(snake.GetX() == r.x && snake.GetY() == r.y) continue;
+
+			bool isTail = false;
+			for(auto &t : snake.Tail()) {
+				if(r.x == t.x && r.y == t.y) { isTail = true; break; }
+			}
+
+			if(!isTail) {
+				g.emplace_back(r);
+			}
+		}
+	}
+
+	return g;
 }

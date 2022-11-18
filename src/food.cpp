@@ -4,7 +4,6 @@
 #include "constants.h"
 
 Food::Food() {
-	Teleport(true);
 	eatSound = LoadSound("sounds/eat.wav");
 	SetSoundVolume(eatSound, 1.0f);
 }
@@ -18,15 +17,9 @@ int clamp(int v, int l, int u) {
 	return std::max(l, std::min(v, u));
 }
 
-void Food::Teleport(bool first) {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distr_x(0, WIDTH / SCALE);
-	std::uniform_int_distribution<> distr_y(0, HEIGHT / SCALE);
-	
-	x = clamp(distr_x(gen) * SCALE, 0, WIDTH - SCALE);
-	y = clamp(distr_y(gen) * SCALE, 0, HEIGHT - SCALE);
-
+void Food::Teleport(int x, int y, bool first) {
+	SetX(x);
+	SetY(y);
 	if(!first) {
 		PlaySoundMulti(eatSound);
 	}

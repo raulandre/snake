@@ -15,7 +15,7 @@ class Food {
 		int GetY() const;
 		void SetX(int x);
 		void SetY(int y);
-		void Teleport(bool first = false);
+		void Teleport(int x, int y, bool first = false);
 		Rectangle AsRec();
 };
 
