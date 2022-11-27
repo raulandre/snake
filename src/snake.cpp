@@ -83,7 +83,7 @@ void Snake::Update() {
 
 	dead = Died();
 	if(dead) {
-		PlaySoundMulti(dieSound);
+		PlaySound(dieSound);
 	}
 }
 

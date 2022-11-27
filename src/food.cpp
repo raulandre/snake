@@ -21,7 +21,7 @@ void Food::Teleport(int x, int y, bool first) {
 	SetX(x);
 	SetY(y);
 	if(!first) {
-		PlaySoundMulti(eatSound);
+		PlaySound(eatSound);
 	}
 }
 
